@@ -1,6 +1,6 @@
 Sistema Experto Escrito en Prolog
 ==================================
 
-![image](screenshots/Captura1.png)
-![image](screenshots/Captura2.png)
-![image](screenshots/Captura3.png)
+![image](screenshots/Captura1.PNG)
+![image](screenshots/Captura2.PNG)
+![image](screenshots/Captura3.PNG)
