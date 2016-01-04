@@ -1,0 +1,152 @@
+
+main:-
+  new(D,dialog('Diagnostico de enfermedades como migraña, resfriado común y gastritis.')),
+  send(D,size,size(560,450)),
+  send(D,colour,colour(red)),
+  send(D, append, new(Menu, menu_bar)),     
+  send(Menu, append, new(Acerca, popup(acerca))),
+  send(Menu, append, new(Ayuda, popup(ayuda))),
+  send_list(Acerca, append,
+                   [ menu_item(objetivo, message(@display, inform, 'Este sistema experto tiene el objetivo de diagnosticar enfermedades comunes como migraña, gastritis y resfriado con el fin de amortizar el exahustiva actividad de ir a una consulta'))
+                   ]),
+  send_list(Ayuda, append,
+                   [ menu_item(autor, message(@display, inform, 'Kevin Esteban Garibo Bracamontes \nRosa Esperanza Pacheco Ramirez'))
+                   ]),
+  mostrar('fondo.jpg',D,Menu),
+  new(B1,button(salir,and(message(D,destroy)))),
+    send(D,append,B1),
+
+    new(B2,button(gastritis,and(message(@prolog,gastri)))),
+    send(D,append,B2),
+
+    new(B3,button(migrana,and(message(@prolog,migra)))),
+    send(D,append,B3),
+
+    new(B4,button(resfriado,and(message(@prolog,resfri)))),
+    send(D,append,B4),
+  send(D,open,point(300,200)).
+
+
+mostrar(V,D,M):- new(I, image(V)),
+    new(B, bitmap(I)),
+    new(F2, figure),
+    send(F2, display, B),
+    new(D1, device),
+    send(D1, display, F2),
+    send(D, display, D1),
+    send(D1,below(M)).
+
+
+mostrar(V,D):- new(I, image(V)),
+    new(B, bitmap(I)),
+    new(F2, figure),
+    send(F2, display, B),
+    new(D1, device),
+    send(D1, display, F2),
+    send(D, display, D1).
+
+resfri:-new(D,dialog('Resfriado Comun')),
+    send(D, append(label(n,'************ Elige SI o NO segun sea tu sintoma ***********'))),
+
+    new(Pre1,menu('¿Nariz congestionada o que gotea?')),
+    send_list(Pre1,append,[si , no]),
+
+    new(Pre2,menu('¿Dolor de garganta?')),
+    send_list(Pre2,append,[si,no]),
+
+    new(Pre3,menu('¿Estornudo?')),
+    send_list(Pre3,append,[si,no]),
+
+    new(Pre4,menu('¿Cansancio?')),
+    send_list(Pre4,append,[si,no]),
+
+    new(Pre5,menu('¿Tos?')),
+    send_list(Pre5,append,[si,no]),
+
+    new(Pre6,menu('¿Picazon en la garganta?')),
+    send_list(Pre6,append,[si , no]),
+
+    new(Pre7,menu('¿Dolor de cabeza?')),
+    send_list(Pre7,append,[si,no]),
+
+    new(Pre8,menu('¿Fiebre moderada?')),
+    send_list(Pre8,append,[si,no]),
+
+    new(Pre9,menu('¿Dolores musculares?')),
+    send_list(Pre9,append,[si,no]),
+
+    new(Pre10,menu('¿Perdida del apetito?')),
+    send_list(Pre10,append,[si,no]),        
+
+
+   send(D,append(Pre1)),
+   send(D,append,Pre2),
+   send(D,append,Pre3),
+   send(D,append,Pre4),
+   send(D,append,Pre5),
+   send(D,append(Pre6)),
+   send(D,append,Pre7),
+   send(D,append,Pre8),
+   send(D,append,Pre9),
+   send(D,append,Pre10),
+   new(B1,button(cerrar,and(message(D,destroy)))),
+   new(B,button(siguiente,message(@prolog,depresion,Pre1?selection,Pre2?selection,Pre3?selection,Pre4?selection,Pre5?selection,Pre6?selection,Pre7?selection,Pre8?selection,Pre9?selection,Pre10?selection))),
+   send(D,append,B1),
+   send(D,append,B),
+   send(D,open,point(300,200)).
+
+
+gastri:-new(D,dialog('Gastritis')),
+    send(D, append(label(n,'*************************** Elige SI o NO segun sea tu sintoma **************************'))),
+
+    new(Pre1,menu('¿Nauseas y vomitos?')),
+    send_list(Pre1,append,[si , no]),
+
+    new(Pre2,menu('¿Vomitos con sangre o material con aspecto de cafe molido?')),
+    send_list(Pre2,append,[si,no]),
+
+    new(Pre3,menu('¿Inapetencia?')),
+    send_list(Pre3,append,[si,no]),
+
+    new(Pre4,menu('¿Dolor en la parte superior del vientre o el abdomen?')),
+    send_list(Pre4,append,[si,no]),
+
+    new(Pre5,menu('¿Heces negras?')),
+    send_list(Pre5,append,[si,no]),
+
+   send(D,append(Pre1)),
+   send(D,append,Pre2),
+   send(D,append,Pre3),
+   send(D,append,Pre4),
+   send(D,append,Pre5),
+   new(B1,button(cerrar,and(message(D,destroy)))),
+   new(B,button(siguiente,message(@prolog,depresion,Pre1?selection,Pre2?selection,Pre3?selection,Pre4?selection,Pre5?selection))),
+   send(D,append,B1),
+   send(D,append,B),
+   send(D,open,point(300,200)).
+
+
+migra:-new(D,dialog('Migraña')),
+    send(D, append(label(n,'************ Elige SI o NO segun sea tu sintoma ***********'))),
+
+    new(Pre1,menu('¿Dolor de cabeza?')),
+    send_list(Pre1,append,[si , no]),
+
+    new(Pre2,menu('¿Luces de colores o destellos de luz?')),
+    send_list(Pre2,append,[si,no]),
+
+    new(Pre3,menu('¿Vomitos?')),
+    send_list(Pre3,append,[si,no]),
+
+    new(Pre4,menu('¿Sencibilidad a la luz?')),
+    send_list(Pre4,append,[si,no]),
+
+   send(D,append(Pre1)),
+   send(D,append,Pre2),
+   send(D,append,Pre3),
+   send(D,append,Pre4),
+   new(B1,button(cerrar,and(message(D,destroy)))),
+   new(B,button(siguiente,message(@prolog,depresion,Pre1?selection,Pre2?selection,Pre3?selection,Pre4?selection))),
+   send(D,append,B1),
+   send(D,append,B),
+   send(D,open,point(300,200)).
